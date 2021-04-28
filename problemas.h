@@ -24,3 +24,4 @@ int problema17(int num);
 void problema18(char *p, int n);
 
 #endif // PROBLEMAS_H
+// cambiar el orden en 10 ---> Listo

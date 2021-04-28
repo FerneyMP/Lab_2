@@ -2,3 +2,8 @@
 #define AUXILIAR_H
 
 #endif // AUXILIAR_H
+
+int menu_entrada();
+
+
+
