@@ -4,6 +4,7 @@
 #endif // AUXILIAR_H
 
 int menu_entrada();
-
-
-
+int recursiva(int fnodo, int cnodo, int v, int nodos);
+long long int factorial(int n);
+char * permutaciones(int y, int num);
+void eliminar(char *p, int n);
