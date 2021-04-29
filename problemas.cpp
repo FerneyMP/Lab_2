@@ -1,7 +1,10 @@
 #include "problemas.h"
 #include <cstdlib>
 #include <time.h>
-
+/*
+ Problema 1:
+ https://www.tinkercad.com/things/cRtYhcumIO8
+ */
 
 void problema2()
 {
@@ -537,6 +540,21 @@ int problema16(int n)
     return caminos;
 }
 
+int problema17(int num)
+{
+    bool check=false;
+    int sumDiv=0;
+    int inicio=2;
+    while(inicio<=num){
+        check = numAmigable(inicio);
+        if(check==true){
+            sumDiv+=inicio;
+        }
+        inicio++;
+    }
+    return sumDiv;
+}
+
 void problema18(char *p, int n)
 {
     char *m;
@@ -586,6 +604,29 @@ Cuál es su dirección en memoria? 0x61fdf0
 Cuál es la dirección y el contenido en memoria del elemento array[3] ? la dirección es 0x61fdfc y el contenido en memoria es 3
 Describa el efecto que tiene la función fun_b, sobre el arreglo array. Se encarga de invertir el arreglo, como resultado: 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 
+// Ejercicio 2
+// & ---> Dirección de una variable.
+
+void fun_c(double *a, int n, double *promedio, double *suma){ //Paso de parámetros por referencia
+    int i;
+    *suma = 0.0;
+    for (i = 0; i < n; i++)
+        *suma += *(a + i);
+    *promedio = *suma / n;
+}
+
+Caso de prueba:
+    Si se ejecuta en el main, declarar la función así: ---> void fun_c(double *a, int n, double *promedio, double *suma);
+
+    double arreglo[3]={7,8,9};
+    double a = 0, b = 0;
+    double *promedio = &a;
+    double *suma = &b;
+    fun_c(arreglo, 3, promedio, suma);
+    cout << "El promedio es: " << *promedio << endl;
+
+    Resultado = 8.
+
 ejercicio 3.
 unsigned short b[4][2] = {{77, 50}, {5, 2}, {28, 39}, {99, 3}};
 cout <<b<<endl; //0x61fe10
@@ -595,6 +636,12 @@ cout <<*(b+2)+1<<endl; //0x61fe1a
 cout <<*(*(b+2)+1)<<endl; //39
 cout <<b[3][1]<<endl;//3
 cout <<*b++<<endl; //tira error, no se puede incrementar
+
+// **********************************************************************************************************************
+
+Ejercicio 4:
+
+https://www.tinkercad.com/things/4JmmTwLCNxZ
 
 Links del tinkercad:
 ejercicio 5.

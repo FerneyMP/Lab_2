@@ -137,10 +137,12 @@ int main()
         break;
 
    case 17:{
-            int num;
-            cout << "Ingrese un numero: "; cin >> num;
-            problema17(num);
-             break;}
+            int numamigable;
+            int x;
+            cout << "Ingrese un numero para ver determinar los numeros amigables: "; cin>> numamigable;
+            x=problema17(numamigable);
+            cout << "El resultado de la suma es: "<< x << endl;
+            break;}
 
     case 18:
         char *p = new char[11];

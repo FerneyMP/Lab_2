@@ -1,37 +1,5 @@
 #include "problemas.h"
 
-// Ejercicio 2
-// & ---> Dirección de una variable.
-
-void fun_c(double *a, int n, double *promedio, double *suma){ //Paso de parámetros por referencia
-    int i;
-    *suma = 0.0;
-    for (i = 0; i < n; i++)
-        *suma += *(a + i);
-    *promedio = *suma / n;
-}
-
-/* Caso de prueba:
-    Si se ejecuta en el main, declarar la función así: ---> void fun_c(double *a, int n, double *promedio, double *suma);
-
-    double arreglo[3]={7,8,9};
-    double a = 0, b = 0;
-    double *promedio = &a;
-    double *suma = &b;
-    fun_c(arreglo, 3, promedio, suma);
-    cout << "El promedio es: " << *promedio << endl;
-
-    Resultado = 8.
-*/
-
-// **********************************************************************************************************************
-
-/* Ejercicio 4:
-
-  https://www.tinkercad.com/things/4JmmTwLCNxZ
-
-*/
-
 int menu_entrada()
 {
     int Entrada;
@@ -48,6 +16,31 @@ int recursiva(int fnodo, int cnodo, int v, int nodos)
     if(caminos[0]) nodos=recursiva(fnodo,cnodo+1,v, nodos);
     if(caminos[1]) nodos=recursiva(fnodo+1,cnodo,v, nodos);
     return nodos;
+}
+
+bool numAmigable(int num)
+{
+    bool checkfinal = false;
+    int plus=0;
+    int plus_2=0;
+    int numero1=1;
+    int numero2 = 1;
+    while(numero1<num/2){
+        if(num%numero1==0){
+            plus+=numero1;
+        }
+        numero1++;
+    }
+    while(numero2<=(plus/2)){
+        if(plus%numero2==0){
+            plus_2+=numero2;
+        }
+        numero2++;
+    }
+    if(plus==num && plus!=num){
+        checkfinal=true;
+    }
+    return checkfinal;
 }
 
 long long factorial(int n)
