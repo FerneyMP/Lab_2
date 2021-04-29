@@ -36,6 +36,35 @@ void problema2()
     }
 }
 
+
+bool problema3(char *c1, char *c2)
+//las cadenas de caracteres terminan cuando se encuentra el caracter de fin de cadena
+{
+    int contador1=0, contador2=0;
+    for (int i=0; *(c1+i)!='\0';i++) contador1++; //longitud de la 1era cadena
+    for (int j=0; *(c2+j)!='\0';j++) contador2++; //longitud de la 2da cadena
+
+    if (contador1==contador2){ //igual longitud
+        for (int i=0; *(c1+i)!='\0';i++){
+             for (int j=0; *(c2+j)!='\0';j++){
+                if (*(c1+i)==*(c2+j)){ //caracteres iguales
+                    //cout<<"La cadena es igual"<<endl;
+                    return true;
+                }
+                else {
+                   // cout<<"La cadena NO es la igual"<<endl;
+                    return false;
+                }
+            }
+        }
+    }
+    else{
+       // cout<<"Diferentes longitudes"<<endl;
+        return false;
+    }
+}
+
+
 long long problema4(char *c)
 {
     long long int *resultado= new long long int[10];
@@ -61,6 +90,33 @@ long long problema4(char *c)
     return *acumulador;
 }
 
+
+void problema5(int num, char *c)
+{
+    int a, A=0;  //longitud
+
+    if (num<0){  // agregar al str la posicion del menos si el numero es negativo
+         c[0]='-';
+         num*=-1; //convertirlo a positivo
+         A++;
+     }
+    a =num;
+
+    if (a==0) c[0]='0';
+
+    while (a>0) {
+        a/=10;     //division entera para saber cuantos digitos tiene
+        A++;      //crear tamano del str
+      }
+
+     for (A--;num>0;num/=10,A--){ //ultima posicion
+         c[A]=num%10+'0';  //reconstruir el numero, solo una posicion
+     }
+
+     cout<<c<<endl;
+}
+
+
 char *problema6(char *c)
 {
     char *cadena2 = new char[1];
@@ -80,6 +136,42 @@ char *problema6(char *c)
     delete[] cadena2;
     return cadena2;
 }
+
+
+void problema7(char *c)
+//Escriba un programa que reciba una cadena de caracteres y elimine los caracteres repetidos.
+
+{
+    cout<<"Original: "<<c<<endl;
+
+    int contador1=0, contador2=0, contador3=0; //inicializar variables
+    char caracter;
+    for (int i=0; *(c+i)!='\0';i++){
+        contador1++; //se calcula la longitus de la cadena
+    }
+
+    char *auxiliar=new char [contador1]; //asignar memoria para "auxiliar" de igual tamano que la cadena ingresada
+
+    for (int j=0; *(c+j)!='\0';j++) {
+        caracter=*(c+j); //almacenar el valor de la cadena en el momento en la variable caracter
+
+        for (int k=0; *(auxiliar+k)!='\0';k++) {
+            if (caracter== *(auxiliar+k))contador2++; //se compara el caracter con lo almacenado en el arreglo "auxiliar"
+        }
+
+        if (contador2==0){
+            auxiliar[contador3]=caracter; //se agrega el elemento si no esta repetido
+            auxiliar[contador3+1]='\0';
+            contador3++;
+        }
+
+        else contador2=0; //se reinicia el contador si el elemento esta repetido
+        }
+
+    cout<<"Sin repetidos: "<< auxiliar<<endl;
+    delete[]auxiliar;// se libera memoria
+}
+
 
 void problema8(char *c1, char *c2)
 {
@@ -108,6 +200,8 @@ void problema8(char *c1, char *c2)
     cout << "Numero: " << c2 << endl;
     delete[] c3;
 }
+
+
 
 long long problema10(char *c)
 {
@@ -173,6 +267,35 @@ long long problema10(char *c)
     return resultado;
 }
 
+
+void problema11(char c, char *c2)
+{
+    static char cine[16][42];
+    int fila,columna;
+    static bool f=false;
+    if (!f){
+        for (int f=0;f<16;f++){
+             for (int c=0;c<42;c++){
+                 if (f==0) cine[f][c]=' ';
+                 else{
+                     if (c==0) cine[f][c]=char(f+64);
+                     else if (c%2==0) cine[f][c]='-';
+                     else cine[f][c]=' ';
+                 }
+                 if (c==41)cine[f][c]='\0';
+             }
+        }
+        f=true;
+    }
+    fila=int (c2[0]-64);
+    columna =2*(int(c2[1])-48);
+    if (c=='I') cine[fila][columna]='+';
+    else if (c=='C') cine[fila][columna]='-';
+
+    for(int i=0; i<16;i++) cout<< cine[i]<<endl<<endl;
+}
+
+
 bool problema12(int **mat, int elementos)
 {
     bool verdadero = false;
@@ -224,6 +347,29 @@ bool problema12(int **mat, int elementos)
     else{ cout << "No es un cuadrado magico ..." << endl;}
    return verdadero;
 }
+
+
+int problema13(int *mat)
+//función que reciba un puntero a la matriz de enteros como argumento y que retorne el número de estrellas.
+//Ignore las posibles estrellas que puedan existir en los bordes de la matriz.
+
+{   int imagen [6][8], estrellas=0 ;
+    float desigualdad;
+    for(int f=0, i=0; f<6;f++){
+        for (int c=0;c<8;c++, i++){
+            imagen[f][c]=*(mat+i);
+        }
+    }
+    for(int f=1, i=0; f<5;f++){
+        for (int c=1;c<7;c++, i++){
+          desigualdad=(imagen[f][c]+ imagen[f][c-1]+imagen[f][c+1]+imagen[f-1][c]+imagen[f+1][c])/5.0;
+          if (desigualdad>6) estrellas++;
+        }
+    }
+
+    return estrellas;
+}
+
 
 void problema14()
 {
@@ -401,3 +547,57 @@ void problema18(char *p, int n)
     }
     else cout << "EL numero de permutacion no es valido" << endl;
 }
+
+
+
+/*----------------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+void fun_a(int *px, int *py);
+void fun_b(int a[], int tam);
+
+int main()
+{
+
+    int array[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    fun_b(array, 10);
+}
+
+void fun_a(int *px, int *py){
+    int tmp = *px;
+    *px = *py;
+    *py = tmp;
+}
+
+void fun_b(int a[], int tam){
+    int f, l;
+    int *b = a;
+    for (f = 0, l = tam -1; f < l; f++, l--) {
+    fun_a(&b[f], &b[l]);
+    }
+}
+
+ejercicio 1.
+Con ayuda del debugger, examine la representación en memoria del arreglo array y responda las siguientes preguntas.
+Cuál es su dirección en memoria? 0x61fdf0
+¿Cuántos bytes se dedican para almacenar cada elemento de array? 4
+Cuál es la dirección y el contenido en memoria del elemento array[3] ? la dirección es 0x61fdfc y el contenido en memoria es 3
+Describa el efecto que tiene la función fun_b, sobre el arreglo array. Se encarga de invertir el arreglo, como resultado: 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+
+ejercicio 3.
+unsigned short b[4][2] = {{77, 50}, {5, 2}, {28, 39}, {99, 3}};
+cout <<b<<endl; //0x61fe10
+cout <<b+2<<endl; //0x61fe18
+cout <<*(b+2)<<endl; //0x61fe18
+cout <<*(b+2)+1<<endl; //0x61fe1a
+cout <<*(*(b+2)+1)<<endl; //39
+cout <<b[3][1]<<endl;//3
+cout <<*b++<<endl; //tira error, no se puede incrementar
+
+Links del tinkercad:
+ejercicio 5.
+Escribir mensajes en un Liquid-Crystal Display (LCD) ---> https://www.tinkercad.com/things/0HEuBSoZkQY
+
+*/
